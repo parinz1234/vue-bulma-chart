@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <canvas id="analytic-chart"></canvas>
-  </div>
+  <canvas :id="chartId"></canvas>
 </template>
 <script>
   export default {
-    // props: ['dataList'],
+    props: ['chartId', 'dataList'],
     methods: {
       createChart(chartId, chartData) {
         const ctx = document.getElementById(chartId);
@@ -31,8 +29,8 @@
             ]
           },
           options: {
-            // responsive: true,
-            // maintainAspectRatio: false,
+            responsive: true,
+            maintainAspectRatio: false,
             lineTension: 1,
             scales: {
               yAxes: [{
@@ -47,11 +45,14 @@
       }
     },
     mounted() {
-      this.createChart('analytic-chart', this.dataList);
+      this.createChart(this.chartId, this.dataList);
     },
     watch: {
       'dataList.first': function () {
-        // this.createChart('analytic-chart', this.dataList);
+        this.createChart(this.chartId, this.dataList);
+      },
+      'dataList.second': function () {
+        this.createChart(this.chartId, this.dataList);
       }
     }
   }

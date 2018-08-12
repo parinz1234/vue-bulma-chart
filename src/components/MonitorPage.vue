@@ -11,13 +11,17 @@
         <div class="columns right-content">
           <div class="column">
             <!-- GRAPH -->
-            <AnalyticChart
-              :dataList="analytic"
+            <Chart
+              :dataList="application"
+              chartId="application-chart"
               />
           </div>
           <div class="column">
             <!-- GRAPH -->
-            <ApplicationChart />
+            <Chart
+              :dataList="analytic"
+              chartId="analytic-chart"
+              />
           </div>
         </div>
       </div>
@@ -26,13 +30,13 @@
 </template>
 <script>
   import Table from './Table'
-  import ApplicationChart from './ApplicationChart'
-  import AnalyticChart from './AnalyticChart'
+  // import ApplicationChart from './ApplicationChart'
+  // import AnalyticChart from './AnalyticChart'
+  import Chart from './Chart'
   export default {
     components: {
       Table,
-      ApplicationChart,
-      AnalyticChart
+      Chart
     },
     data: () => ({
       table: [],
@@ -41,15 +45,19 @@
         first: [],
         second: []
       },
-      application: []
+      application: {
+        labels: [],
+        first: [],
+        second: []
+      }
     }),
     created () {
-      this.randomTable()
-      this.randomAnalytic()
+      // this.randomTable()
+      // this.randomAnalytic()
       setInterval(() => {
         this.randomTable()
         this.randomAnalytic()
-        // console.log(this.analytic)
+        this.randomApplication()
       }, 5000)
     },
     methods: {
@@ -66,7 +74,9 @@
         this.analytic.second = Array(31).fill().map(() => Math.round(Math.random() * 10))
       },
       randomApplication () {
-
+        this.application.labels = Array(31).fill().map((value, index) => index + 1)
+        this.application.first = Array(31).fill().map(() => Math.round(Math.random() * 10))
+        this.application.second = Array(31).fill().map(() => Math.round(Math.random() * 10))
       }
     }
   }
