@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table 
+    <table
       class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth"
       >
       <thead>
@@ -11,13 +11,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr :key="item.id" v-for="item in dataList">
-          <td>{{item.id}}</td>
-          <td>{{item.title}}</td>
-          <td>{{item.value}}</td>
-          <!-- <td class="has-text-centered" colspan="3">No data</td> -->
-        </tr>
-
+        <template v-if="dataList.length > 0">
+          <tr :key="item.id" v-for="item in dataList">
+            <td>{{item.id}}</td>
+            <td>{{item.title}}</td>
+            <td>{{item.value}}</td>
+          </tr>
+        </template>
+        <template v-else>
+          <td class="has-text-centered" colspan="3">No data</td>
+        </template>
       </tbody>
     </table>
   </div>
